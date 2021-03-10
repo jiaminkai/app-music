@@ -66,7 +66,7 @@
 		</view>
 	</view>
 	<!-- 歌单分类 -->
-	<view class="albumtab" :class="this.isF?'sticky-fixed':'sticky'">
+	<view class="albumtab" :class="fixed?'sticky-fixed':'sticky'">
 		<view class="albumtabitem" @click="changealbumtab(0)"  ><text :class="this.index==0?'active':''">创建歌单</text></view>
 		|
 		<view class="albumtabitem" @click="changealbumtab(1)" ><text :class="this.index==1?'active':''">收藏歌单</text></view>
@@ -123,6 +123,7 @@ export default {
 	data(){
 		return{
 			index:0,
+			fixed:false
 		}
 	},
 	props:{
@@ -131,9 +132,13 @@ export default {
 		subplay:Array,
 		like:Array,
 		level:Object,
-		isF:Boolean,
+		isF:Number,
 	},
-
+	watch:{
+		isF:function(){
+			
+		}
+	},
 	methods:{
 		changealbumtab(index){
 			var scrollTop= 0
@@ -394,7 +399,12 @@ export default {
 		top: 40px;
 		left:0;
 		background:#fff;
+		margin-left: -40rpx;
 		box-shadow: 2px 2px 10px #f3f3f3;
+		width: 100%;
+		height: 60rpx;
+		align-items: center;
+		padding: 0 40rpx;
 	}
 	.sticky{
 		position: relative;
