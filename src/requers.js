@@ -1,6 +1,4 @@
 import axios from "axios"
-import qs from "qs"
-import Vue from "vue"
 
 const request = axios.create({
 	baseURL: "http://localhost:3000", // 正式环境

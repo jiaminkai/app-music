@@ -135,9 +135,14 @@ export default {
 		isF:Number,
 	},
 	watch:{
-		isF:function(){
-			
+		isF:function(newValue,oldValue){
+				 if(newValue>=320){
+					 this.fixed= true
+				 }else{
+					 this.fixed= false
+				 }
 		}
+
 	},
 	methods:{
 		changealbumtab(index){

@@ -155,13 +155,10 @@ export default {
     },
     // 手指点击事件
     touchstart(event){
-      console.log("手指停放：",event.touches[0].clientX)
       this.staticX =event.touches[0].clientX
     },
     // 手指松开：事件
     touchend(event){
-      console.log("手指松开：")
-        
       if(this.moveX<-80){
         this.menban=false
       }
@@ -172,9 +169,12 @@ export default {
       if(event.touches[0].clientX-this.staticX <0){
         this.moveX =event.touches[0].clientX-this.staticX 
       }
-      
-      console.log("手指移动：",this.moveX)
-    }
+    },
+    tologin(){
+			uni.navigateTo({
+				url:'/pages/Login/Login'
+			})
+		}
 
   }
 }
@@ -206,7 +206,7 @@ export default {
   left: 0;
   z-index: 1;
   display: flex;
-  box-shadow: 2px 2px 10px #ccc;
+  border-bottom: 1px solid #f5f5f5;
 }
 .mengban{
   position:fixed;

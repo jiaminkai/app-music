@@ -38,7 +38,6 @@ export default {
 			console.log(data)
 			if(data.code==200){
 				console.log("登录成功")
-				
 				sessionStorage.setItem('Login',JSON.stringify(data.profile))
 				uni.navigateTo({
 					url:'/pages/index/index'

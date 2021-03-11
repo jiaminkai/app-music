@@ -21,8 +21,8 @@
 		>
 			<swiper-item>
 				<view>
-					<scroll-view class="mianscroll" :scroll-y="true" @scroll="myscroll" :scroll-top="scrolltop" >
-						<my :login="this.login" :subplay="subplay"   @scrollto ="scrollto" :level="level" :like="like" :creatplay="creatplay"></my>
+					<scroll-view class="mianscroll" :scroll-y="true" @scroll="myscroll" >
+						<my :login="this.login" :subplay="subplay"  :isF="isF"  @scrollto ="scrollto" :level="level" :like="like" :creatplay="creatplay"></my>
 					</scroll-view>
 				</view>
 			</swiper-item>
@@ -37,8 +37,9 @@
 			</swiper-item>
 			<!-- 视频页 -->
 			<swiper-item>
-				<view >
-				</view>
+				<scroll-view  class="mianscroll" @scroll="voidescroll" :scroll-y="true" :scroll-top="scrolltop"  lower-threshold="30" @scrolltolower="scrolltolower">
+					<videos @backtop="backtop" ></videos>
+				</scroll-view>
 			</swiper-item>
 			<swiper-item>
 				<view>
@@ -54,6 +55,7 @@ import toptab from "../components/toptab/toptab";
 import { login,playlist,level,likelist } from "../../api/user/user";
 import faxina from "./indextab.vue"
 import my from "./indextabmy.vue"
+import videos from "./indextabVideo.vue"
 
 import { getbanner,geticon,subablum,musicmv,newsongs,getsongsurl,getcalendar,hotartists,getprogram} from "../../api/main/main";
 
@@ -76,10 +78,19 @@ import { getbanner,geticon,subablum,musicmv,newsongs,getsongsurl,getcalendar,hot
 				subplay:[],
 				like:[],
 				level:{},
-				scrolltop:0
+				scrolltop:0,
+				isF:0,
+				Timer:null,
+				oldscrolltop:0
 			}
 		},
-		components:{faxina,toptab,my},
+		components:{faxina,toptab,my,videos},
+		watch:{
+			login:function(newValue,oldValue){
+				this.Getcalendar()
+				this.Getplaylist()
+			}
+		},
 		onLoad() {
 			this.login = JSON.parse(sessionStorage.getItem('Login'))||"";
 			geticon().then(res=>{
@@ -105,10 +116,7 @@ import { getbanner,geticon,subablum,musicmv,newsongs,getsongsurl,getcalendar,hot
 				})
 			},
 			myscroll(res){
-				console.log(res.target.scrollTop)
-				if(res.target.scrollTop>320){
-
-				}
+				this.isF=res.target.scrollTop
 			},
 			 scrollto(scrollTop){
 				 console.log(scrollTop)
@@ -159,7 +167,6 @@ import { getbanner,geticon,subablum,musicmv,newsongs,getsongsurl,getcalendar,hot
 			},
 			//获取用户歌单
 			async Getplaylist(){
-				console.log(this.login)
 				const like =await likelist(this.login.userId)
 				const data =await playlist(this.login.userId)
 				const leve =await level(this.login.userId)
@@ -173,12 +180,33 @@ import { getbanner,geticon,subablum,musicmv,newsongs,getsongsurl,getcalendar,hot
 				this.$set(this,'subplay',subplay)
 				this.$set(this,'like',like.ids)
 				this.$set(this,'level',leve.data)
-
-
 			},
 			//切换tab栏
 			changetab(index){
 				this.index=index
+			},
+			//滚动监听函数
+			scrolltolower(){
+				console.log("到了")
+				this.derber(this.nextpage,1000)()
+			},
+			//加载下一页
+			nextpage(){
+
+				uni.$emit('update',{msg:'请求下一页'})
+
+			},
+			//节流
+			derber(fn,delay){
+				var that = this
+				return function(...args) {
+					if (!that.Timer) {
+						that.Timer = setTimeout(() => {
+						fn()
+						that.Timer = null
+						}, delay)
+					}
+				}
 			},
 			//滑动页面
 			changecurrent(data){
@@ -192,6 +220,18 @@ import { getbanner,geticon,subablum,musicmv,newsongs,getsongsurl,getcalendar,hot
 					newArray.push(arr.slice(index, index += num));
 				}
 				return newArray;
+			},
+			voidescroll (e) {
+            //记录scroll  位置
+            	this.oldscrolltop = e.detail.scrollTop
+        	},
+			//点击视频分类回到顶部
+			backtop(){		
+				this.scrolltop = this.oldscrolltop
+				//当视图渲染结束 重新设置为0
+				this.$nextTick(() =>{
+					this.scrolltop = 0
+				});
 			}
 		},
 	}
