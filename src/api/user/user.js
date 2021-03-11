@@ -85,3 +85,39 @@ export function Videourl(uid){
 		method: 'get'
 	})
 }
+//热评
+export function Hotcommet(){
+	return request({
+		url:`/hot/topic`,
+		method: 'get'
+	})
+}
+// //视频详情
+// export function Videourl(uid){
+// 	return request({
+// 		url:`/video/url?id=${uid}`,
+// 		method: 'get'
+// 	})
+// }
+// //视频详情
+// export function Videourl(uid){
+// 	return request({
+// 		url:`/video/url?id=${uid}`,
+// 		method: 'get'
+// 	})
+// }
+// //视频详情
+// export function Videourl(uid){
+// 	return request({
+// 		url:`/video/url?id=${uid}`,
+// 		method: 'get'
+// 	})
+// }
+
+// //视频详情
+// export function Videourl(uid){
+// 	return request({
+// 		url:`/video/url?id=${uid}`,
+// 		method: 'get'
+// 	})
+// }
