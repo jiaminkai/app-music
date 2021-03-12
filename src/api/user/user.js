@@ -86,33 +86,33 @@ export function Videourl(uid){
 	})
 }
 //热评
-export function Hotcommet(){
+export function Hotcommet(limit=50,offset){
 	return request({
-		url:`/hot/topic`,
+		url:`/hot/topic?limit=${limit}&offset=${offset}`,
 		method: 'get'
 	})
 }
-// //视频详情
-// export function Videourl(uid){
-// 	return request({
-// 		url:`/video/url?id=${uid}`,
-// 		method: 'get'
-// 	})
-// }
-// //视频详情
-// export function Videourl(uid){
-// 	return request({
-// 		url:`/video/url?id=${uid}`,
-// 		method: 'get'
-// 	})
-// }
-// //视频详情
-// export function Videourl(uid){
-// 	return request({
-// 		url:`/video/url?id=${uid}`,
-// 		method: 'get'
-// 	})
-// }
+//搜索
+export function Searchkey(keywords){
+	return request({
+		url:`/search/suggest?keywords=${keywords}&type=mobile`,
+		method: 'get'
+	})
+}
+//热搜列表
+export function HotSearch(){
+	return request({
+		url:`/search/hot/detail`,
+		method: 'get'
+	})
+}
+//视频详情
+export function Searchmatch(uid,type=1018){
+	return request({
+		url:`/search?keywords=${uid}&type=${type}`,
+		method: 'get'
+	})
+}
 
 // //视频详情
 // export function Videourl(uid){

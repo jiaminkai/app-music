@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<titlenav :name="this.name" @backtop="backtop"></titlenav>
+		<titlenav :name="this.name" @backnav="backtop"></titlenav>
 		<view class="login">
 			<text class="desc">没有注册过的手机号会自动注册</text>
 			<view class="phone">

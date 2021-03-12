@@ -1,7 +1,12 @@
 <template>
   <view class="title">
 	  <view class="iconfont back" @click="back">&#xe703;</view>
-	  <view class="name">{{this.name}}</view>
+	  <view v-if="this.name" class="name">{{this.name}}</view>
+	  <view v-else class="solt">
+		  <view  solt="didongyi"></view>
+	  </view>
+	  
+
   </view>
 </template>
 
@@ -12,8 +17,7 @@ export default {
 	},
 	methods:{
 		back(){
-			this.$emit('backtop')
-			
+			this.$emit('backnav')
 		}
 	}
 }
@@ -53,5 +57,9 @@ export default {
 		width:60rpx;
 		height:100%;
 		line-height:80rpx;
+		margin-left: 30rpx;
+	}
+	.solt{
+		flex:1
 	}
 </style>

@@ -28,7 +28,7 @@
 		  </view>
 	  </view>
 	  <view class="videoslist" v-else>
-		  暂无该视频分类
+		  暂无推荐视频，请稍后再试
 	  </view>
 	  <request-loading></request-loading>
   </view>

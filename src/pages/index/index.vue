@@ -11,7 +11,7 @@
 				<view class="tabitem" @click="changetab(3)" :class="this.index==3?'active':''">云村</view>
 			</view>
 			<view class="tingge" slot="right">
-				<text class="iconfont">&#xe618;</text>
+				<text @click="tosearch" class="iconfont">&#xe618;</text>
 			</view>
 		</toptab>
 		<swiper
@@ -41,10 +41,11 @@
 					<videos @backtop="backtop" ></videos>
 				</scroll-view>
 			</swiper-item>
-			<swiper-item>
-				<view>
-					云村
-				</view>
+			<swiper-item >
+				
+					<yuncun></yuncun>
+
+				
 			</swiper-item>
 		</swiper>
 	</view>
@@ -56,6 +57,8 @@ import { login,playlist,level,likelist } from "../../api/user/user";
 import faxina from "./indextab.vue"
 import my from "./indextabmy.vue"
 import videos from "./indextabVideo.vue"
+import yuncun from "./indexyuncun.vue"
+
 
 import { getbanner,geticon,subablum,musicmv,newsongs,getsongsurl,getcalendar,hotartists,getprogram} from "../../api/main/main";
 
@@ -84,7 +87,7 @@ import { getbanner,geticon,subablum,musicmv,newsongs,getsongsurl,getcalendar,hot
 				oldscrolltop:0
 			}
 		},
-		components:{faxina,toptab,my,videos},
+		components:{faxina,toptab,my,videos,yuncun},
 		watch:{
 			login:function(newValue,oldValue){
 				this.Getcalendar()
@@ -232,6 +235,13 @@ import { getbanner,geticon,subablum,musicmv,newsongs,getsongsurl,getcalendar,hot
 				this.$nextTick(() =>{
 					this.scrolltop = 0
 				});
+			},
+			//跳转搜索页面
+			tosearch(){
+				console.log("跳转")
+				uni.navigateTo({
+					url:'/pages/search/search'
+				})
 			}
 		},
 	}
