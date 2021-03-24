@@ -16,7 +16,7 @@
 	<view class="subtab">
 			<scroll-view class="scroll-view_H" :show-scrollbar="true" scroll-x="true"  scroll-left="120">
 				<view  class="scroll-view-item_H uni-bg-red" v-for="(item,index) in this.icon" :key="index">
-					<view class="scroll-view-item-icon">
+					<view  class="scroll-view-item-icon" @click="tabto(item)">
 						<img :src="item.iconUrl" alt="">
 						<text class="">{{item.name}}</text>
 					</view>
@@ -35,7 +35,7 @@
 		</view>
 		<view class="subablumlist" >
 			<scroll-view :scroll-x="true" :scroll-with-animation="true" scroll-left="40" :show-scrollbar="false" class="scroll-view_H">
-				<view class="subablumitem" v-for="(item,index) in this.paly" :key="index">
+				<view class="subablumitem" @click="toplay(item)" v-for="(item,index) in this.paly" :key="index">
 					<view class="ablumitem">
 						<img :src="item.picUrl" alt="">
 						<text class="name">{{item.name}}</text>
@@ -191,6 +191,24 @@ export default {
 				return:[]
 			}
 		},
+	},
+	methods: {
+		// 每日推荐跳转
+		tabto(item){
+			// console.log(item )
+			if(item.id==-1){
+				uni.navigateTo({
+					url:'/pages/recommend/recommend'
+				})
+			}
+		},
+		// 调往歌单详情
+		toplay(item){
+			console.log(item)
+			uni.navigateTo({
+				url:'/pages/recommend/recommendplay?id='+item.id
+			})
+		}
 	}
 }
 </script>

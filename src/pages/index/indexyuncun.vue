@@ -53,7 +53,6 @@ export default {
 			console.log(hotcommet)
 			this.fencommet =hotcommet.hot
 			this.Hotcommet = this.fencommet.filter((item,index)=>{
-				console.log(index)
 				return index<10
 				})
 		},
@@ -61,7 +60,6 @@ export default {
 			var len =this.fencommet.length  -(this.hotpage*10)
 			if(len <10 && len>0){
 				var c = this.fencommet.filter((item,index)=>{
-					console.log(index)
 					return  index > this.hotpage*10
 				})
 				this.Hotcommet.push(...c)
@@ -69,7 +67,6 @@ export default {
 			}
 			if(len>0){
 				var c = this.fencommet.filter((item,index)=>{
-					console.log(index)
 					return index <= this.hotpage*10 &&  index > (this.hotpage-1)*10
 				})
 				this.Hotcommet.push(...c)

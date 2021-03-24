@@ -1,5 +1,8 @@
 <template>
-  <view>云村</view>
+  <view class="djRadios">
+	  电台
+	  
+  </view>
 </template>
 
 <script>

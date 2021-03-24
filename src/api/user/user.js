@@ -106,18 +106,30 @@ export function HotSearch(){
 		method: 'get'
 	})
 }
-//视频详情
-export function Searchmatch(uid,type=1018){
+//搜索
+export function Searchmatch(uid,type=1018,limit=30,offset=0){
 	return request({
-		url:`/search?keywords=${uid}&type=${type}`,
+		url:`/cloudsearch?keywords=${uid}&type=${type}&limit=${limit}&offset=${offset*limit}`,
 		method: 'get'
 	})
 }
+//综合
+export function Searchnum(uid){
+	return request({
+		url:`/search?keywords=${uid}&type=1018`,
+		method: 'get'
+	})
+}
+export function searcsub(uid){
+	return request({
+		url:`/search/multimatch?keywords=${uid}`,
+		method: 'get'
+	})
+}
+export function lishi(uid){
+	return request({
+		url :`/user/record?uid=${uid}&type=0`,
+		method: 'get'
+	})
 
-// //视频详情
-// export function Videourl(uid){
-// 	return request({
-// 		url:`/video/url?id=${uid}`,
-// 		method: 'get'
-// 	})
-// }
+}

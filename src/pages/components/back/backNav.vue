@@ -3,7 +3,7 @@
 	  <view class="iconfont back" @click="back">&#xe703;</view>
 	  <view v-if="this.name" class="name">{{this.name}}</view>
 	  <view v-else class="solt">
-		  <view  solt="didongyi"></view>
+		   <slot name="didongyi"></slot>
 	  </view>
 	  
 
@@ -17,7 +17,7 @@ export default {
 	},
 	methods:{
 		back(){
-			this.$emit('backnav')
+			uni.navigateBack(1)
 		}
 	}
 }
@@ -43,6 +43,7 @@ export default {
 		width:100%;height: 80rpx;
 		box-shadow: 2px 2px 10px #ccc;
 		display: flex;
+		z-index: 9999;
 		align-items: center;
 		position: relative;
 	}

@@ -70,13 +70,16 @@ export function getcalendar(){
 		url:`/calendar?startTime=1606752000000&endTime=1609430399999`,
 		method: 'get'
 	})
-}// 获取url
-// export function getsongsurl(id){
-// 	return request({
-// 		url:`/song/url?id=${id}`,
-// 		method: 'get'
-// 	})
-// }// 获取url
+}
+// 获取url
+export function comment(id){
+	return request({
+		url:`/comment/new?type=2&id=2819914042&sortType=3&cursor=&pageSize=20&pageNo=1`,
+
+		method: 'get'
+	})
+}
+// 获取url
 // export function getsongsurl(id){
 // 	return request({
 // 		url:`/song/url?id=${id}`,

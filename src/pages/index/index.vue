@@ -41,13 +41,11 @@
 					<videos @backtop="backtop" ></videos>
 				</scroll-view>
 			</swiper-item>
-			<swiper-item >
-				
+			<swiper-item >	
 					<yuncun></yuncun>
-
-				
 			</swiper-item>
 		</swiper>
+		<playmusic></playmusic>
 	</view>
 </template>
 

@@ -1,7 +1,7 @@
 <template>
   <view class="category">
      <scroll-view scroll-x="true" class="scroll">
-        <view class="item"  @click="change(item,index)" v-for="(item,index) in this.category" :class="countindex==index?'active':''" :key="index">{{item.name}}</view>
+        <view class="item"  @click="change(item,index)" :class="countindex==index?'active':''" v-for="(item,index) in this.category"  :key="index">{{item.name}}</view>
      </scroll-view>
   </view>
 </template>

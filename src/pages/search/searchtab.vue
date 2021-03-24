@@ -2,7 +2,7 @@
 	<view class="topnav">
 		<view class="iconfont back" @click="backnav">&#xe703;</view>
 		<view class="searchinput">
-			<input type="text" placeholder="请输入歌手名、关键字" v-model="value">
+			<input type="text"  placeholder="请输入歌手名、关键字" v-model="value">
 			<text v-if="isclose" class="iconfont cloce" @click="close">&#xe701;</text>
 		</view>
 		<view  class="searchbox" :class="this.isf?'searchset':'create-content'">
@@ -60,6 +60,11 @@ export default {
 				url:'/pages/search/search'
 			})
 		},
+		// 失去焦点
+		onblur(){
+			console.log("失去焦点")
+			this.isf =false
+		},
 		tosearchset(item){
 			this.tosearch(item)
 			this.isf=false
@@ -80,13 +85,20 @@ export default {
 			// 搜索关键词
 		async getsearchkey(){
 			const search =await Searchkey(this.value)
-			this.keys=search.result.allMatch
+			this.$set(this,'keys',search.result.allMatch)
 		},
 		// 点击热搜结果
 		tosearch(item){
+			console.log(item)
 			this.$emit('addhis',item)
 			var list = item.searchWord ||item.keyword
+			uni.navigateTo({
+				url:'/pages/search/searchset?key='+list,
+			})
 		},
+		backnav(){
+			uni.navigateBack(0)
+		}
 	},
 	created(){
 		if(this.setvalue){
@@ -141,13 +153,15 @@ export default {
 	}
 	.searchinput input{
 		width: 100%;
+		height:0rpx;
 	}
 	.searchset{
 		opacity:1;
-		z-index: 3;
+		z-index: 9999;
+		height:auto;
 	}
 	.searchbox{
-		position: absolute;	
+		position: fixed;	
 		width: 90%;
 		left:6%;
 		box-shadow: 1rpx 1rpx 10rpx #ccc;
@@ -158,13 +172,13 @@ export default {
 	.create-content{
 		opacity:0;
 		z-index: -1;
+		display:none;
 	}
 	.keysitem{
 		width:100%;
 		overflow: hidden;
 	}
 	.artists{
-
 		color: #a3a0a0;
 		width:100%;
 		text-align: left;
