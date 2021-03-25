@@ -16,7 +16,7 @@
 	<view class="subtab">
 			<scroll-view class="scroll-view_H" :show-scrollbar="true" scroll-x="true"  scroll-left="120">
 				<view  class="scroll-view-item_H uni-bg-red" v-for="(item,index) in this.icon" :key="index">
-					<view  class="scroll-view-item-icon" @click="tabto(item)">
+					<view  class="scroll-view-item-icon" @click="tabto(index)">
 						<img :src="item.iconUrl" alt="">
 						<text class="">{{item.name}}</text>
 					</view>
@@ -28,7 +28,7 @@
 	<view class="subablum">
 		<view class="ablum">
 			<text>推荐歌单</text>
-				<view class="move">
+				<view class="move" @click="toplayguan">
 					<text>更多</text>
 					<text class="iconfont moveleft">&#xe65f;</text>
 				</view>
@@ -57,8 +57,7 @@
 			<text class="titleright"><text class="iconfont">&#xe630;</text>更多</text>
 		</view>
 		<view class="newsongs">
-			<swiper 
-				:circular="true"
+			<swiper
 				:autoplay="false"
 				class="newswiper"
 				next-margin="30px"
@@ -194,12 +193,14 @@ export default {
 	},
 	methods: {
 		// 每日推荐跳转
-		tabto(item){
-			// console.log(item )
-			if(item.id==-1){
+		tabto(index){
+			if(index==0){
 				uni.navigateTo({
 					url:'/pages/recommend/recommend'
 				})
+			}
+			if(index==2){
+				this.toplayguan()
 			}
 		},
 		// 调往歌单详情
@@ -207,6 +208,12 @@ export default {
 			console.log(item)
 			uni.navigateTo({
 				url:'/pages/recommend/recommendplay?id='+item.id
+			})
+		},
+				// 调往歌单详情
+		toplayguan(){
+			uni.navigateTo({
+				url:'/pages/playlist/playlist'
 			})
 		}
 	}
@@ -347,7 +354,7 @@ export default {
 		flex-direction: column;
 		background:#fff;
 		margin: 20rpx 0;
-		padding: 0 20rpx;
+		padding: 10rpx 20rpx;
 		
 	}
 	.mintitle{
@@ -386,15 +393,15 @@ export default {
 	}
 	.newswiper{
 		width: 100%;
-		height: 400rpx;
 	}
 	.newsongs{
-		display: flex;
 		width: 100%;
+		height:500rpx;
 	}
 	.newsong{
 		box-shadow: 2px 2px 10px #ccc;
 		border-radius: 30rpx;
+		height:100%;
 		margin: 20rpx 0;
 		box-sizing: border-box;
 	}

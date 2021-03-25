@@ -11,4 +11,16 @@ export function lyric(id){
 		url:`/lyric?id=${id}`
 	})
 }
+// 获取歌单详情
+export function Hotplaylist(id){
+	return request({
+		url:`/playlist/hot`
+	})
+}
+// 获取歌单详情
+export function playlist(cat='全部',limit=30,offset=1){
+	return request({
+		url:`/top/playlist?limit=${limit}&order=hot&cat=${cat}&offset=${offset}`
+	})
+}
 

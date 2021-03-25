@@ -80,7 +80,7 @@
 					<view class="iconfont">&#xe631;</view>
 			</view>
 		</view>
-		<view class="playitem" v-for="(item,index) in this.creatplay" :key="index">
+		<view class="playitem" v-for="(item,index) in this.creatplay" @click="toplay(item)" :key="index">
 			<view class="playimg"><img :src="item.coverImgUrl" alt=""></view>
 			<view class="playcontent">
 				<view class="playname">{{item.name}}</view>
@@ -105,7 +105,7 @@
 		<view class="albumbotton" v-if="this.subplay.length==0">
 			<view class="albumnull">暂时还没有收藏的歌单</view>
 		</view>
-		<view class="playitem" v-else v-for="(item,index) in this.subplay" :key="index">
+		<view class="playitem" v-else @click="toplay(item)" v-for="(item,index) in this.subplay" :key="index">
 			<view class="playimg"><img :src="item.coverImgUrl" alt=""></view>
 			<view class="playcontent">
 				<view class="playname">{{item.name}}</view>
@@ -159,6 +159,12 @@ export default {
 		tologin(){
 			uni.navigateTo({
 				url:'/pages/Login/Login'
+			})
+		},
+		toplay(item){
+			console.log(item)
+			uni.navigateTo({
+				url:'/pages/recommend/recommendplay?id='+item.id
 			})
 		}
 	}

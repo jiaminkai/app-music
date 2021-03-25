@@ -68,8 +68,9 @@
 				</view>
 			</view>
 		</view>
+		<request-loading></request-loading>
 	</scroll-view>
-	<request-loading></request-loading>
+	
 	
   </view>
 </template>
@@ -90,14 +91,13 @@ export default {
   },
   components: { tabnav },
   onLoad(target) {
-	this.$showLoading()
     this.id = target.id;
     this.getdetails();
-	this.$hideLoading()
   },
   methods: {
 	//处理歌单数据
     async getdetails() {
+		this.$showLoading()
       const data = await playdetail(this.id);
 	  console.log(data)
 	  data.privileges.forEach(item=>{
@@ -105,6 +105,7 @@ export default {
 		  var song = new Song(res[0].songs[0],res[1].data[0])
 		  this.$set(item,'song',song)
 	  	})
+		  this.$hideLoading()
 	  })
 
       this.recomms = data;

@@ -7,6 +7,13 @@
 			}
 		},
 		{
+			"path": "pages/playlist/playlist",
+			"style": {
+				"navigationStyle":"custom"  
+			}
+		},
+		
+		{
 			"path": "pages/search/search",
 			"style": {
 				"navigationStyle":"custom"  

@@ -34,7 +34,7 @@ Vue.prototype.$palytime=function(musictime){
   return (Math.floor(musictime/1000/60)<10?"0"+Math.floor(musictime/1000/60):Math.floor(musictime/1000/60))+":"+(Math.floor(musictime/1000%60)<10?"0"+Math.floor(musictime/1000%60):Math.floor(musictime/1000%60))
 }
 Vue.prototype.$palycount=function(playCount){
-  return playCount= playCount>10000? (parseInt(playCount)/10000).toFixed(1)+'万' : (parseInt(playCount)/1000)>1 ? (parseInt(playCount)/1000).toFixed(1)+'千':playCount
+  return playCount=playCount>100000000? (parseInt(playCount)/100000000).toFixed(1)+'亿' : playCount>10000? (parseInt(playCount)/10000).toFixed(1)+'万' : (parseInt(playCount)/1000)>1 ? (parseInt(playCount)/1000).toFixed(1)+'千':playCount
 }
 
 // 初始化音乐
